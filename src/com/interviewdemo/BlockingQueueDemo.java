@@ -1,8 +1,15 @@
 package com.interviewdemo;
 
-import java.util.concurrent.ArrayBlockingQueue;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+
+/**
+ * add remove element 操作不正确时抛异常
+ * offer poll  peek   操作不正确时返回true、false或者null
+ * put  take    一直阻塞
+ * offer poll 阻塞，在timeout之内
+ */
 
 class Producer implements Runnable {
 

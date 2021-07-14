@@ -1,8 +1,10 @@
 package com.interviewdemo;
 
-import java.net.BindException;
 import java.util.concurrent.Semaphore;
 
+/**
+ * 6个车竞争停车场
+ */
 public class SemaphoreDemo {
 
     public static void main(String[] args) {
