@@ -76,6 +76,14 @@ import java.util.Random;
  *          CMS非常适合堆内存大、CPU核数多的服务器端应用，也是G1出现前大型应用的首选收集器
  *          参数：-XX:_UseConcMarkSweepGC  开启该参数，自动会打开 -XX:UseParNewGC打开；
  *          开启该参数，使用Parnew（Young区用）+ CMS（Old区用） + Seriial Old的收集器组合，Serial Old 将作为 CMS出错后的后备收集器
+ *          优点：暂停时间短，响应快；
+ *          缺点：占用CPU资源高；由于并发进行，CMS在收集与应用线程会同时增加对堆内存的占用，也就是说，CMS必须要在老年代堆内存用尽之前完成垃圾回收，否则CMS回收失败时，将触发担保机制，串行老年代收集器，将会以STW的方式进行一次GC,从而造成较大时间停顿；
+ *               标记清除算法无法整理空间碎片，
+ *          参数：-Xms10m -Xmx10m -XX:+PrintGCDetails -XXPrintCommandLineFlags -XX:+UseConcMarkSweepGC
+ *
+ *
+ * 老年区串行收集器(SerialOld）：只使用一个线程进行垃圾回收，回收时会暂停用户线程；最古老、最稳定、以及高效的收集器，可能会产生较长时间停顿（Stop-The-World），
+ *
  */
 
 public class GCDemo {
