@@ -94,7 +94,7 @@ import java.util.Random;
  *          不需要更大的java Heap；
  *       设计目标是取代CMS收集器，相比CMS：
  *          G1是一个又内存整理过程的垃圾收集器，不会产生很多内存碎片；
- *          G1的stop the world更可控，G1在停顿时间上添加了预测机制，用户可以指定期望停顿时间。
+ *          G1的stop the world更可控，G1在停顿时间上添加了预测机制，用户可以指定期望停顿时间。-XX:MaxGCPauseMillis=100
  *
  *       主要的改变是Eden，Survivor、Tenured等内存不再是连续区域了，而变成一个个大小一样的regin；每个regin从1M到32M不等。
  *       G1尽可能压缩STW时间，
@@ -102,6 +102,9 @@ import java.util.Random;
  *       G1不再区分年轻代、老年代，存不再是连续区域了，而变成一个个大小一样的regin；每个regin从1M到32M不等。
  *       G1其本省依然在小范围内进行年轻代、老年代的区分，保留新生代、老年代，但不再是物理隔离，而是一部分Regin集合，并且不需要连续，也就是说依然会采用不同的GC方式处理不同的区域。
  *       G1虽然也是分代收集器，但整个内存分区不存在物理上的年轻代、老年代，也不需要完全独立的survivor堆做复制准备。G1只用逻辑上的分代概念，或者说每个分区都可能随G1的运行在不同代之间前后切换；
+ *       启动时可以通过-XX:G1HeapRegionSize=n可以指定分区大小（1M-32M必须是2的幂）默认将整堆分为2048个分区；也就是最大能支持内存32M*2048=64G内存;
+ *       主要建议可设置参数：-XX:+UseG1GC -XX:G1HeapRegionSize=32M -XX:MaxGCPauseMillis=100
+ *
  *
  *
  *
