@@ -19,7 +19,7 @@ package com.interviewdemo;
  *
  * jps
  * ps -mp 进程 -o THREAD,tid,time
- * jstack tid | grep tid(16) -A60 ******没有成功，计划换成oracle JDK试试******
+ * jstack tid | grep tid(16) -A60 ******没有成功，计划换成oracle JDK试试******    错误原因：jstack 后面只能跟进程ID，而不是写线程ID
  */
 
 public class TuningJVMGC {
